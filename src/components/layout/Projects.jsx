@@ -105,7 +105,11 @@ const ProjectCard = ({ project, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="group relative bg-secondary-dark/20 backdrop-blur-sm border border-white/5 rounded-xl overflow-hidden hover:border-accent/20 transition-colors duration-300"
+            whileHover={{
+                y: -5,
+                transition: { duration: 0.2 },
+            }}
+            className="group relative bg-glass backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:border-accent/20 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
         >
             {!project.github && (
                 <div className="absolute top-3 right-3">

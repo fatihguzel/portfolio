@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import SpaceScene from "../3d/SpaceScene";
 import CodeAnimation from "../3d/CodeAnimation";
+import TypeWriter from "../ui/TypeWriter";
 
 const Hero = () => {
     return (
@@ -34,14 +35,15 @@ const Hero = () => {
                             >
                                 👋 Hey there! I'm
                             </motion.h2>
-                            <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.3 }}
-                                className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500"
-                            >
-                                Fatih Güzel
-                            </motion.h1>
+                            <TypeWriter
+                                words={[
+                                    "Fatih Güzel",
+                                    "Full Stack Developer",
+                                    "Web3 Enthusiast",
+                                    "Problem Solver",
+                                ]}
+                                className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+                            />
                         </div>
                         <div className="space-y-4 mb-8">
                             <p className="text-xl text-gray-300">

@@ -36,6 +36,13 @@ export default {
                     },
                 },
             },
+            backdropBlur: {
+                xs: "2px",
+            },
+            backgroundImage: {
+                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+                glass: "linear-gradient(to right bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))",
+            },
         },
     },
     plugins: [],

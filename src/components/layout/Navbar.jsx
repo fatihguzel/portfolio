@@ -108,36 +108,39 @@ const NavLinks = ({ mobile, setIsOpen }) => {
     ];
 
     return links.map((link, index) => (
-        <motion.a
-            key={link.href}
-            href={link.href}
-            initial={mobile ? { opacity: 0, x: -10 } : false}
-            animate={mobile ? { opacity: 1, x: 0 } : false}
-            transition={{ delay: index * 0.1 }}
-            className={`relative group ${
-                mobile
-                    ? "block px-4 py-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                    : "text-gray-300 hover:text-white transition-colors"
-            }`}
-            onClick={(e) => {
-                e.preventDefault();
-                document
-                    .querySelector(link.href)
-                    ?.scrollIntoView({ behavior: "smooth" });
-                if (setIsOpen) setIsOpen(false);
-            }}
-        >
+        <NavLink key={link.href} href={link.href} mobile={mobile}>
             {link.text}
-            {!mobile && (
-                <motion.span
-                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-accent origin-left"
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.3 }}
-                />
-            )}
-        </motion.a>
+        </NavLink>
     ));
 };
+
+const NavLink = ({ href, children, mobile }) => (
+    <motion.a
+        href={href}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className={`relative group ${
+            mobile
+                ? "block px-4 py-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                : "text-gray-300 hover:text-white transition-colors"
+        }`}
+        onClick={(e) => {
+            e.preventDefault();
+            document
+                .querySelector(href)
+                ?.scrollIntoView({ behavior: "smooth" });
+        }}
+    >
+        {children}
+        {!mobile && (
+            <motion.span
+                className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-accent to-purple-500 origin-left"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.3 }}
+            />
+        )}
+    </motion.a>
+);
 
 export default Navbar;

@@ -18,3 +18,26 @@ export const fadeIn = {
     animate: { opacity: 1 },
     transition: { duration: 0.5 },
 };
+
+export const slideInFromLeft = {
+    initial: { x: -100, opacity: 0 },
+    animate: { x: 0, opacity: 1 },
+    transition: { type: "spring", stiffness: 100 },
+};
+
+export const slideInFromRight = {
+    initial: { x: 100, opacity: 0 },
+    animate: { x: 0, opacity: 1 },
+    transition: { type: "spring", stiffness: 100 },
+};
+
+export const pulseAnimation = {
+    animate: {
+        scale: [1, 1.05, 1],
+        transition: {
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+        },
+    },
+};

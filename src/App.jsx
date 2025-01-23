@@ -13,6 +13,9 @@ import Footer from "./components/layout/Footer";
 import Loading from "./components/ui/Loading";
 import NetworkAnimation from "./components/3d/NetworkAnimation";
 import ScrollToTop from "./components/ui/ScrollToTop";
+import ParticleBackground from "./components/ui/ParticleBackground";
+import ScrollProgress from "./components/ui/ScrollProgress";
+import MouseFollower from "./components/ui/MouseFollower";
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +36,9 @@ function App() {
         <ThemeProvider>
             <Router>
                 <div className="relative min-h-screen bg-primary-dark text-white overflow-hidden">
+                    <ParticleBackground />
+                    <ScrollProgress />
+                    <MouseFollower />
                     <div className="fixed inset-0 z-0">
                         <div className="animated-gradient" />
                         <div className="noise-overlay" />
