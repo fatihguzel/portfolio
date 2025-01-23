@@ -1,83 +1,58 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const MouseFollower = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isHovering, setIsHovering] = useState(false);
+    const [clicks, setClicks] = useState([]);
 
     useEffect(() => {
-        const updateMousePosition = (e) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
+        const handleClick = (e) => {
+            const newClick = {
+                x: e.clientX,
+                y: e.clientY,
+                id: Date.now(),
+            };
+            setClicks((prev) => [...prev, newClick]);
+
+            // Her bir baloncuğu 1 saniye sonra kaldır
+            setTimeout(() => {
+                setClicks((prev) =>
+                    prev.filter((click) => click.id !== newClick.id)
+                );
+            }, 1000);
         };
 
-        const handleMouseOver = (e) => {
-            if (e.target.tagName === "A" || e.target.tagName === "BUTTON") {
-                setIsHovering(true);
-            } else {
-                setIsHovering(false);
-            }
-        };
-
-        window.addEventListener("mousemove", updateMousePosition);
-        window.addEventListener("mouseover", handleMouseOver);
-
-        return () => {
-            window.removeEventListener("mousemove", updateMousePosition);
-            window.removeEventListener("mouseover", handleMouseOver);
-        };
+        window.addEventListener("click", handleClick);
+        return () => window.removeEventListener("click", handleClick);
     }, []);
 
     return (
-        <>
-            {/* Ana cursor */}
-            <motion.div
-                className="fixed top-0 left-0 w-4 h-4 bg-accent rounded-full pointer-events-none z-50 mix-blend-difference"
-                animate={{
-                    x: mousePosition.x - 8,
-                    y: mousePosition.y - 8,
-                    scale: isHovering ? 1.5 : 1,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 350,
-                    damping: 20,
-                    mass: 0.5,
-                }}
-            />
-
-            {/* Dış halka */}
-            <motion.div
-                className="fixed top-0 left-0 w-8 h-8 border-2 border-accent rounded-full pointer-events-none z-50 mix-blend-difference"
-                animate={{
-                    x: mousePosition.x - 16,
-                    y: mousePosition.y - 16,
-                    scale: isHovering ? 2 : 1,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 250,
-                    damping: 20,
-                    mass: 0.8,
-                }}
-            />
-
-            {/* Parıltı efekti */}
-            <motion.div
-                className="fixed top-0 left-0 w-16 h-16 bg-accent/20 rounded-full pointer-events-none z-40 blur-md"
-                animate={{
-                    x: mousePosition.x - 32,
-                    y: mousePosition.y - 32,
-                    scale: isHovering ? 1.5 : 0.5,
-                    opacity: isHovering ? 0.5 : 0.2,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 20,
-                    mass: 1,
-                }}
-            />
-        </>
+        <AnimatePresence>
+            {clicks.map((click) => (
+                <motion.div
+                    key={click.id}
+                    initial={{
+                        opacity: 0.8,
+                        scale: 0.2,
+                        x: click.x - 8,
+                        y: click.y - 8,
+                    }}
+                    animate={{
+                        opacity: 0,
+                        scale: 1.5,
+                        y: click.y - 50,
+                    }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    transition={{
+                        duration: 0.8,
+                        ease: "easeOut",
+                    }}
+                    className="fixed pointer-events-none z-50"
+                >
+                    <div className="w-4 h-4 rounded-full bg-gradient-to-r from-accent via-purple-500 to-pink-500 blur-[2px]" />
+                    <div className="absolute inset-0 w-4 h-4 rounded-full border border-white/50 animate-ping" />
+                </motion.div>
+            ))}
+        </AnimatePresence>
     );
 };
 
