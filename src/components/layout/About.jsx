@@ -14,11 +14,13 @@ const About = () => {
                 "React",
                 "Next.js",
                 "Tailwind CSS",
+                "Redux",
+                "React Query",
             ],
         },
         {
             category: "Backend",
-            items: ["Node.js", "Flask", "GraphQL"],
+            items: ["Node.js", "Flask", "Nest.js"],
         },
         {
             category: "Web3",
@@ -26,7 +28,7 @@ const About = () => {
         },
         {
             category: "Diğer",
-            items: ["Git", "MongoDB", "Redux", "React Query"],
+            items: ["Git", "GitHub", "GitLab", "MongoDB"],
         },
     ];
 
@@ -50,14 +52,14 @@ const About = () => {
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="flex flex-col md:flex-row gap-12 items-center">
                     {/* 3D Model */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
-                        className="h-[400px] bg-secondary-light/5 dark:bg-secondary-dark/5 rounded-xl overflow-hidden"
+                        className="h-[400px] bg-secondary-light/5 dark:bg-secondary-dark/5 rounded-xl overflow-hidden w-full"
                     >
                         <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
                             <Suspense fallback={null}>
@@ -76,22 +78,22 @@ const About = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
-                        className="grid grid-cols-2 gap-6"
+                        className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
                     >
                         {skills.map((skillGroup, index) => (
                             <div
                                 key={index}
-                                className="bg-gray-900/50 p-6 rounded-xl"
+                                className="bg-gray-900/50 py-6 px-12 rounded-xl hover:bg-gray-900/70 transition-colors"
                             >
-                                <h3 className="text-xl font-semibold mb-4">
+                                <h3 className="text-xl font-semibold mb-4 text-start underline">
                                     {skillGroup.category}
                                 </h3>
-                                <ul className="space-y-2">
+                                <ul className="grid grid-cols-1 gap-2 items-center">
                                     {skillGroup.items.map(
                                         (skill, skillIndex) => (
                                             <li
                                                 key={skillIndex}
-                                                className="text-gray-400"
+                                                className="text-gray-400 list-disc"
                                             >
                                                 {skill}
                                             </li>
