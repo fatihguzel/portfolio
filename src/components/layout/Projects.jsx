@@ -8,7 +8,7 @@ const Projects = () => {
                 "MetaMask ile NFT işlemlerinin gerçekleştirildiği blockchain tabanlı bir marketplace. React ve Web3 teknolojileri kullanılarak geliştirildi. Kullanıcılar sanal para birimi ile NFT alım-satım işlemleri yapabiliyor.",
             tech: ["React", "Web3.js", "MetaMask", "Blockchain", "Redux"],
             github: null,
-            live: null,
+            live: "https://app.digard.io/dashboard",
         },
         {
             title: "AI Camera Analytics",
@@ -16,7 +16,7 @@ const Projects = () => {
                 "Yapay zeka destekli kameralardan gelen verilerin işlenip analiz edildiği bir yönetim paneli. Nextjs ve Redux kullanılarak geliştirildi. WebSocket ile gerçek zamanlı veri akışı sağlandı.",
             tech: ["Next.js", "Redux", "WebSocket", "Firebase", "AI"],
             github: null,
-            live: null,
+            live: "https://play.google.com/store/apps/details?id=com.eyediusone",
         },
         {
             title: "Real Estate Analytics",
